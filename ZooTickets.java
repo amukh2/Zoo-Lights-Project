@@ -13,17 +13,49 @@ public class ZooTickets {
 
         Scanner input = new Scanner(System.in);
 
+        System.out.println("\nWelcome to the Zoo Tickets Application");
+
+        while (true) {
+            start(ticketList);
+        }
+
+    }
+
+    public static void start(ArrayList<Ticket> ticketList) {
+
+        Scanner input = new Scanner(System.in);
+
         String sellOrLookup;
 
-        System.out.println("Welcome to the Zoo Tickets Application");
-        System.out.println("Would you like to look up or sell tickets? (sell/look) > ");
+        System.out.println("\nWould you like to look up or sell tickets? (sell/look) > ");
 
         sellOrLookup = input.nextLine();
 
         if (sellOrLookup.equalsIgnoreCase("sell")) {
             sellTickets(ticketList);
+        } else if (sellOrLookup.equalsIgnoreCase("look")) {
+            findTicket(ticketList);
+        }
+    }
+
+    public static void findTicket(ArrayList<Ticket> ticketList) {
+
+        Scanner input = new Scanner(System.in);
+
+        String ticketId;
+        Ticket ticket = null;
+
+        System.out.println("Enter ticket ID: > ");
+        ticketId = input.nextLine();
+
+        for (int i = 0; i < ticketList.size(); i++) {
+            ticket = ticketList.get(i);
+            break;
         }
 
+        if (ticket != null) {
+            ticket.DisplayTicket();
+        }
 
     }
 
@@ -116,20 +148,10 @@ public class ZooTickets {
 
         }
 
-        for (int i = 0;i<numPeople;i++) {
+        for (int i = 0;i<ticketList.size();i++) {
             ticketList.get(i).DisplayTicket();
         }
 
-    }
-
-    public static int getNextEmptySpot(int[] list) {
-        for (int i = 0;i<list.length;i++) {
-            if (list[i] == 0) {
-                return i;
-            }
-        }
-        System.out.println("No empty ticket spot found");
-        return 0; // if no spots available
     }
 
     public static String generateId(ArrayList<Ticket> ticketList) {
