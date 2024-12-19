@@ -1,54 +1,61 @@
-import java.io.*;
-import javax.swing.*;
-
-
 public class Ticket {
+
     String id;
     String name;
+    String day;
     int age;
-    double cost;
-    boolean alcohol;
-    boolean train;
-    int numPeople;
+    int height;
+    int weight;
+    int price;
+    int numPeople = 0;
+    boolean walkthrough;
+    Check check;
 
-    public static void main(String[] args) {
-        Ticket kyle = new Ticket("Kyle", 1823, 80, false, false, 1);
-        output(kyle);
+    boolean trainAccess;
+    boolean alcoholAccess;
+
+    public Ticket(String id, String name,String day, int age, int height, int weight, boolean walkthrough, Check check) {
+
+        this.id = id;
+        this.name = name;
+        this.age = age; // age when at date of attendance
+        this.height = height;
+        this.weight = weight;
+        this.walkthrough = walkthrough;
+        this.check = check;
+        this.day = day;
+
+        trainAccess = AccessToTrain();
+        alcoholAccess = AccessToAlcohol();
+
+        check.processTicketPrice(this);
+
     }
 
-    public Ticket(String name, int age, double cost, boolean alcohol, boolean train, int numPeople){
-        for (int i = 0; i < 5; i++){
-            id = id + String.valueOf((int) Math.round(Math.random() * 10));
-            this.name = name;
-            this.age = age;
-            this.cost = cost;
-            this.alcohol = alcohol;
-            this.train = train;
-            this.numPeople = numPeople;
+    public boolean AccessToTrain() {
+        boolean access = true;
+        if (!walkthrough || height < 48 || weight < 300) {
+            access = false;
         }
+        return access;
     }
 
-    public static void output(Ticket num){
-        JFrame frame = new JFrame();
-
-        // Creating instance of JButton
-        JButton button = new JButton(" GFG WebSite Click");
-
-        JTextField outputName = new JTextField("Name: " + num.name);
-
-
-        // adding button in JFrame
-        frame.add(button);
-        frame.add(outputName);
-
-        // 400 width and 500 height
-        frame.setSize(500, 250);
-
-        // using no layout managers
-        frame.setLayout(null);
-
-        // making the frame visible
-        frame.setVisible(true);
-
+    public boolean AccessToAlcohol() {
+        boolean access = true;
+        if (!walkthrough || age < 21) {
+            access = false;
+        }
+        return access;
     }
+
+    public void DisplayTicket() {
+        System.out.println("\nTicket " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Alcohol access: "+alcoholAccess);
+        System.out.println("Train access: "+trainAccess);
+        System.out.println("Ticket price: "+price);
+        System.out.println("Check price: "+check.getPrice());
+    }
+
 }
