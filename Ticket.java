@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class Ticket {
 
     String id;
@@ -56,6 +59,40 @@ public class Ticket {
         System.out.println("Train access: "+trainAccess);
         System.out.println("Ticket price: "+price);
         System.out.println("Check price: "+check.getPrice());
+        
+        JFrame frame = new JFrame();
+        JButton button = new JButton("hi");
+        JLabel outputID = new JLabel("ID: " + id);
+        JLabel outputName = new JLabel("Name: " + name);
+        JLabel outputAge = new JLabel("Age: " + age);
+        JLabel outputCost = new JLabel("Cost: " + check.getPrice());
+        JLabel outputAlcohol = new JLabel("Alcohol: " + alcoholAccess);
+        JLabel outputTrain = new JLabel("Train: " + rainAccess);
+        Color c = new Color(255,244,155);
+
+
+        outputName.setBounds(20,50, 300,30);
+        outputID.setBounds(20,25, 300,30);
+        outputAge.setBounds(20,75, 300,30);
+        outputCost.setBounds(20,100, 300,30);
+        outputAlcohol.setBounds(20,125, 300,30);
+        outputTrain.setBounds(20,150, 300,30);
+
+        frame.add(button);
+        frame.add(outputName);
+        frame.add(outputID);
+        frame.add(outputAge);
+        frame.add(outputCost);
+        frame.add(outputAlcohol);
+        frame.add(outputTrain);
+
+        frame.setSize(500, 250);
+        frame.setLayout(null);
+        UIManager.put("Label.font", "Broadway");
+        //UIManager.put("Label.", 32 );
+        SwingUtilities.updateComponentTreeUI(frame);
+        frame.getContentPane().setBackground(c);
+        frame.setVisible(true);
     }
 
 }
